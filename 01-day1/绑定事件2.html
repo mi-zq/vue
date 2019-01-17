@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click='start'>走起</button>
+        <button @click='end'>停止</button>
+        <h4>{{msg}}</h4>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: '一波骚浪贱操作马上开始',
+                timeId:''
+            },
+            methods: {
+                start() {
+                    clearInterval(this.timeId);
+                    this.timeId = setInterval(() => {
+                        let starts = this.msg.substr(0, 1);
+                        let ends = this.msg.substr(1);
+                        this.msg = ends + starts;
+                    },500)
+                },
+                end() {
+                    clearInterval(this.timeId)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='a' @change="add">
+        <!-- <ul>
+            <li v-for="item of list">{{a}}</li>
+        </ul>
+        <button @click="addKey">add</button> -->
+        <h4>{{msg}}</h4>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg: '',
+                a:'3'
+            },
+            methods:{
+               add(){
+                this.msg = this.a
+               }
+            }
+        })
+    </script>
+</body>
+</html>
