@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 class='panel-title'>添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>Id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>Name:
+                    <input type="text" class="form-control" v-model="name">
+                </label>
+                <input type="button" @click="add" class="btn btn-primary" value="添加">
+                <label>搜索品牌关键字:
+                    <input type="text" class="form-control" v-model="keyWords">
+                </label>
+            </div>
+        </div>
+
+        <!-- Table -->
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>cTime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keyWords)" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.cTime | dataFormat}}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Vue.config.keyCodes.f = 113
+
+        Vue.filter('dataFormat', function (dataStr, pattern = "") {
+            var dt = new Date(dataStr)
+
+            var y = dt.getFullYear();
+            var m = dt.getMonth() + 1;
+            var d = dt.getDate();
+
+            if (pattern.toLowerCase() == 'yyy-mm-dd') {
+                return `${y}-${m}-${d}`
+            } else {
+                var hh = dt.getHours()
+                var mm = dt.getMinutes()
+                var ss = dt.getSeconds()
+
+                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            }
+
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                id: '',
+                name: '',
+                keyWords: '',
+                list: [
+                    { id: 1, name: '宝马', cTime: new Date() },
+                    { id: 2, name: '本田', cTime: new Date() }
+                ]
+            },
+            methods: {
+                add() {
+                    var car = { id: this.id, name: this.name, cTime: new Date() }
+                    this.list.push(car)
+                    this.id = this.name = ''
+                },
+                del(id) {
+                    // this.list.findIndex((item , i) => {
+                    //     if(this.id == id){
+                    //         this.list.splice(i,1)
+                    //         return true
+                    //     }
+                    // })
+                    this.list.splice(this.list.findIndex(item => this.item == id), 1)
+                },
+                search(keyWords) {
+                    var newArr = [];
+                    this.list.forEach(item => {
+                        if (item.name.indexOf(keyWords) != -1) {
+                            newArr.push(item)
+                        }
+                    })
+                    return newArr
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
