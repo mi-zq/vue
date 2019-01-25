@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity:0;
+            transform:translateX(200px);
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition:all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+    </div>
+    <script>
+        var login = {
+            template: '<h3>这是登录页</h3>'
+        }
+
+        var register = {
+            template: '<h3>这是注册页</h3>'
+        }
+
+
+        var routerObj = new VueRouter({
+            routes: [
+
+                { path: '/login', component: login }, //path表示监听 哪个路由的链接地址
+                { path: '/register', component: register } //component表示相对应的组件模板名称,不能是引用,不能是字符串
+            ]
+        })
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+
+            },
+            router: routerObj
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+            <!-- 列表页 -->
+    <template id="new-list">
+        <div class="list-news-container">
+            <h3>这是列表页</h3>
+            <ul class="new-list-ul">
+                <li v-for="item in list" :key="item.id">
+                    <p>标题:{{item.title}}</p>
+                    <p>内容简介:{{item.content}}</p>
+                </li>
+            </ul>
+        </div>
+    </template>
+
+    <!-- 详情页 -->
+    <template id="new-info">
+        <div>
+            <h3>这是详情页</h3>
+        </div>
+    </template>
+
+
+    <script>
+        //创建子组件--列表页
+        var listComment = {
+            template: '#new-list',
+            data() {
+                return {
+                    list: [
+                        { id: 1, title: '重磅消息', content: '还有三天就放假啦' },
+                        { id: 2, title: '重磅消息', content: '还有三天就放假啦' },
+                        { id: 3, title: '重磅消息', content: '还有三天就放假啦' }
+
+                    ]
+                }
+            }
+        }
+
+        // 详情页
+        var infoComment = {
+            template: '<h3>详情页</h3>'
+        }
+
+        //创建路由
+        const router = new VueRouter({
+            routes: [
+                {path:'/',}
+            ]
+        })
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            ruoter
+        })
+    </script>
+</body>
+
+</html>
