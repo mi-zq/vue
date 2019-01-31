@@ -15,9 +15,48 @@
     <script>
         new Vue({
             el:'#app',
+            template:"<p>{{this.msg}}</p>",
             data:{
-                msg:'这是生命周期'
+                msg:'这是生命周期',
+                msg2: '我需要改变'
+            },
+            beforeCreate(){
+                //表示创建了一个vm新实例对象,这个对象身上只有默认的生命周期函数和一些事件,其他的都没有创建
+                //这个时候data和methods都没有初始化
+                console.log('beforeCreate')
+            },
+            created(){
+                //在created中 data和methods数据都初始化好了
+                //如果要调用methods方法或操作data数据, 最早,只能在created里面操作
+                console.log('created')
+                console.log(this.$el)
+            },
+            beforeMount(){
+                console.log('beforeMout')
+                // console.log(this.$el)
+                //此函数执行时,模板已经渲染到内存中去了,但是没有挂载到页面中去,此时页面还是旧的数据
+            },
+            mounted(){
+                console.log('mounted'),
+                console.log(this.$el)
+                //只要执行完了mounted表示整个Vue已经初始化完毕,进入了运行阶段
+                this.msg = this.msg2
+
+            },
+            beforDestroy(){
+                console.log('beforDestory')
+            },
+            destroyed() {
+                console.log('restroyed')
+            },
+            beforUpdate(){
+                console.log('beforUpdate') 
+            },
+            updated(){
+                console.log('updated')
             }
+
+
         })
     </script>
 </body>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="点击增加对象数据" @click="add">
+        <h3>往对象中添加对象方法</h3>
+        <ul>
+            <li v-for="(val , key , index) of obj">
+                值:{{val}}===key{{key}}===索引{{index}}
+            </li>
+        </ul>
+        <hr>
+        <input type="button" value="点击增加数组数据" @click="add2">
+        <h3>往数组中添加方法</h3>
+        <ul>
+            <li v-for="(item, index) of list">
+                 {{item}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                obj:
+                    {
+                        id: 1 , 
+                        name: '小白' ,
+                        title: '长胖了',
+                        age: 18,
+                        sex: '男'
+                     },
+                     list:[1,2,3,4]
+                
+            },
+            methods: {
+                add(){
+                    Vue.set(this.obj, 'skin'+Math.random(), 'red')
+                },
+                add2(){
+                    this.$set(this.list,0,'你好吗')
+                }
+            },
+        })
+    </script>
+</body>
+</html>
