@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+            <h2>ref 的使用 如果是一个组件,使用$refs获取到的是子组件的实例引用</h2>
+            <item @fasong="jieshou" ref="one"></item>
+            <item @fasong="jieshou" ref="two"></item>
+            <div>我现在要求上面2个子组件的总和: {{total}}</div>
+    </div>
+
+    <script>
+        Vue.component('item', {
+            data() {
+                return {
+                    num: 0
+                }
+            },
+            template: "<div @click='add'>{{num}}</div>",
+            methods: {
+                add(){
+                    this.num++
+                    console.log(this.$emit)
+                    this.$emit('fasong')
+                }
+            },
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                total: 0
+            },
+            methods: {
+                jieshou(){
+                    console.log(this.$refs.one.num)
+                    this.total = this.$refs.one.num + this.$refs.two.num
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

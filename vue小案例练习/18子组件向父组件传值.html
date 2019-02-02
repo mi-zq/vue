@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item1 :conter="2" @fasong="jieshou"></item1>
+        <item1 :conter="3" @fasong="jieshou"></item1>
+        <div>{{total}}</div>
+    </div>
+
+    <script>
+        //定义子组件
+        var item={
+            props:["conter"],
+            data(){
+                return {
+                    num:this.conter
+                }
+            },
+            template:'<div @click="addData">{{num}}</div>',
+            methods: {
+                addData(){
+                    this.num=this.num+2;
+                    this.$emit('fasong',2)
+                }
+            },
+        }
+        new Vue({
+            el:'#app',
+            data:{
+                total:5
+            },
+            methods: {
+                jieshou(step){
+                        this.total += step
+                    }
+            },
+            components:{
+                item1:item
+            }
+        })
+    </script>
+</body>
+</html>

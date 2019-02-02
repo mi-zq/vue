@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <hr>
+                <tr is="rows"></tr>
+                <tr is="rows"></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        Vue.component('row', {
+            data: {
+                content: "我是一个组件实例错误写法"
+            },
+            template:'<tr><td>{{content}}</tr></td>'
+        })
+
+        Vue.component('rows',{
+            data(){
+                return {
+                    content:'我是组件实例正确写法'
+                }
+            },
+            template:'<tr><td>{{content}}</tr></td>'
+        })
+        new Vue({
+            el: '#app',
+            data: {}
+        })
+    </script>
+</body>
+
+</html>

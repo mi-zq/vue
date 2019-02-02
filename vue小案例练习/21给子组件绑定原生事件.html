@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child @click="handle"></child>
+    </div>
+    <script>
+        Vue.component("child",{
+            template:"<div @click='dianji'>我要绑定原生事件</div>",
+            methods: {
+                dianji(){
+                    this.$emit('click')
+                }
+            },
+        })
+        new Vue({
+            el:'#app',
+            methods:{
+                handle(){
+                    alert('我是父组件的click事件')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

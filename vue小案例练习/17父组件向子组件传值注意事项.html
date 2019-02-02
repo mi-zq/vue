@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <item1 :conter="0"></item1>
+        <item1 :conter="1"></item1>
+    </div>
+
+    <script>
+        var item = {
+            props: ["conter"],
+            data() {
+                return {
+                    num: this.conter
+                }
+            },
+            template: "<div @click='addData'>{{num}}</div>",
+            created() {
+                console.log(typeof(this.conter));
+                console.log(this.num);
+            },
+            methods: {
+                addData(){
+                    console.log(this.num);
+                    this.num++
+                }
+            },
+        }
+        new Vue({
+            el:"#app",
+            data: {},
+            components:{
+                item1:item
+            }
+        })
+    </script>
+</body>
+
+</html>
